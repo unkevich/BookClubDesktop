@@ -19,8 +19,8 @@ namespace BookClubApp {
         public void ShowProducts() {
             MainFrame.Navigate(new ProductsTablePage());
             SizeToContent = SizeToContent.Manual;
-            MinWidth = 900; MinHeight = 600;
-            Width = 1100; Height = 700;
+            MinWidth = 1100; MinHeight = 700;
+            Width = 1400; Height = 900;
             WindowState = WindowState.Maximized;
         }
 

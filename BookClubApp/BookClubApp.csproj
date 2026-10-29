@@ -41,6 +41,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="PdfSharp"><HintPath>..\packages\PdfSharp.1.50.5147\lib\net20\PdfSharp.dll</HintPath><Private>True</Private></Reference>
+    <Reference Include="QRCoder"><HintPath>..\packages\QRCoder.1.6.0\lib\net40\QRCoder.dll</HintPath><Private>True</Private></Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -261,6 +264,25 @@
     <Page Include="Pages\HomePage.xaml"><Generator>MSBuild:Compile</Generator><SubType>Designer</SubType></Page>
     <Compile Include="Pages\HomePage.xaml.cs"><DependentUpon>HomePage.xaml</DependentUpon></Compile>
     <Page Include="Styles\DashboardStyles.xaml"><Generator>MSBuild:Compile</Generator><SubType>Designer</SubType></Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Services\ManagementService.cs" />
+    <Compile Include="Helpers\UiCommand.cs" />
+    <Page Include="Styles\ManagementStyles.xaml"><Generator>MSBuild:Compile</Generator><SubType>Designer</SubType></Page>
+    <Page Include="Controls\ManagementView.xaml"><Generator>MSBuild:Compile</Generator><SubType>Designer</SubType></Page>
+    <Compile Include="Controls\ManagementView.xaml.cs"><DependentUpon>ManagementView.xaml</DependentUpon></Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Helpers\PhoneNumber.cs" />
+    <Compile Include="Services\LiveDataWatcher.cs" />
+    <Compile Include="Services\ClientOrderService.cs" />
+    <Page Include="Controls\PaymentWindow.xaml"><Generator>MSBuild:Compile</Generator><SubType>Designer</SubType></Page>
+    <Compile Include="Controls\PaymentWindow.xaml.cs"><DependentUpon>PaymentWindow.xaml</DependentUpon></Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Services\ReceiptService.cs" />
+    <Compile Include="Services\ReceiptPdfWriter.cs" />
+    <Compile Include="Helpers\ReceiptExport.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -361,3 +361,8 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+# Generated receipt QA artifacts
+output/pdf/
+tmp/pdfs/
+/tmp/ui-cash/
+/tmp/ui-spacing/

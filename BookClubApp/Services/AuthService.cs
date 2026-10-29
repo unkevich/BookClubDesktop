@@ -1,4 +1,4 @@
-using BookClubApp.Entity;
+﻿using BookClubApp.Entity;
 using BookClubApp.Helpers;
 using System;
 using System.Data.Entity;
@@ -9,6 +9,7 @@ namespace BookClubApp.Services {
     public sealed class UserSession {
         public int Id { get; private set; }
         public string NumberPhone { get; private set; }
+        public string DisplayPhone { get { return PhoneNumber.Format(NumberPhone); } }
         public int Role { get; private set; }
         public string RoleName { get { return Role == 3 ? "Администратор" : Role == 2 ? "Менеджер" : "Клиент"; } }
         public bool IsStaff { get { return Role == 2 || Role == 3; } }

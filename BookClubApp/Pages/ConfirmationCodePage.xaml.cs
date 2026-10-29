@@ -14,7 +14,7 @@ namespace BookClubApp.Pages {
 
         public ConfirmationCodePage(string phone) {
             InitializeComponent();
-            txtBlockPhone.Text = string.IsNullOrWhiteSpace(phone) ? "8 (___) ___-__-__" : phone;
+            txtBlockPhone.Text = string.IsNullOrWhiteSpace(phone) ? "+7 (___) ___-__-__" : BookClubApp.Helpers.PhoneNumber.Format(phone);
             resendTimer.Interval = TimeSpan.FromSeconds(1);
             resendTimer.Tick += resendTimer_Tick;
             Loaded += (sender, e) => { resendTimer.Start(); UpdateResendText(); };

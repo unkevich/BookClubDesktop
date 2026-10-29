@@ -10,6 +10,7 @@
                 <ResourceDictionary Source="/Styles/AuthIllustrations.xaml"/>
                 <ResourceDictionary Source="/Styles/AuthStyles.xaml"/>
                 <ResourceDictionary Source="/Styles/DashboardStyles.xaml"/>
+                <ResourceDictionary Source="/Styles/ManagementStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

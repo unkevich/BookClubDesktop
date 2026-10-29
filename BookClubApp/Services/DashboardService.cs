@@ -1,4 +1,5 @@
 using BookClubApp.Entity;
+using BookClubApp.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -13,6 +14,7 @@ namespace BookClubApp.Services {
         public int Id { get; set; }
         public DateTime Date { get; set; }
         public string Phone { get; set; }
+        public string DisplayPhone { get { return PhoneNumber.Format(Phone); } }
         public int ItemCount { get; set; }
         public decimal Amount { get; set; }
         public string Status { get; set; }
@@ -35,6 +37,7 @@ namespace BookClubApp.Services {
     public sealed class ClientRow {
         public int Id { get; set; }
         public string NumberPhone { get; set; }
+        public string DisplayPhone { get { return PhoneNumber.Format(NumberPhone); } }
         public DateTime Created_at { get; set; }
         public int OrderCount { get; set; }
     }
@@ -44,6 +47,11 @@ namespace BookClubApp.Services {
         public string Name { get; set; }
         public string Author { get; set; }
         public string Category { get; set; }
+        public int CategoryId { get; set; }
+        public string Description { get; set; }
+        public decimal? OldPrice { get; set; }
+        public string OldPriceLabel { get { return OldPrice > Price ? OldPrice.Value.ToString("N2") + " ₽" : ""; } }
+        public string DiscountText { get { return OldPrice > Price && OldPrice > 0 ? "−" + Math.Round((1 - Price / OldPrice.Value) * 100) + "%" : ""; } }
         public decimal Price { get; set; }
         public int BookCount { get; set; }
         public int MinBookCount { get; set; }
@@ -95,7 +103,7 @@ namespace BookClubApp.Services {
                     .Select(user => new ClientRow { Id = user.Id, NumberPhone = user.NumberPhone, Created_at = user.Created_at, OrderCount = user.Orders.Count() }).ToListAsync();
                 data.Products = await ProductQuery(context).OrderByDescending(product => product.OrderItems.Count()).ThenBy(product => product.Id)
                     .Select(product => new ProductCard { Id = product.Id, Name = product.Name, Author = product.Author,
-                        Category = product.Category1.Name, Price = product.Price, BookCount = product.BookCount,
+                        Category = product.Category1.Name, CategoryId = product.Category, Description = product.Description, OldPrice = product.OldPrice, Price = product.Price, BookCount = product.BookCount,
                         MinBookCount = product.MinBookCount, ImagePreview = product.ImagePreview }).ToListAsync();
                 AuthService.RequireStaff();
                 if (!ReferenceEquals(session, AuthService.Current)) throw new UnauthorizedAccessException("Сеанс завершён.");
@@ -110,9 +118,9 @@ namespace BookClubApp.Services {
         public static async Task<List<ProductCard>> LoadCatalogAsync() {
             using (BookBaseEntities context = new BookBaseEntities()) {
                 context.Database.CommandTimeout = 10;
-                return await ProductQuery(context).OrderBy(product => product.Name)
+                return await ProductQuery(context).OrderByDescending(product => product.OrderItems.Count()).ThenBy(product => product.Name)
                     .Select(product => new ProductCard { Id = product.Id, Name = product.Name, Author = product.Author,
-                        Category = product.Category1.Name, Price = product.Price, BookCount = product.BookCount,
+                        Category = product.Category1.Name, CategoryId = product.Category, Description = product.Description, OldPrice = product.OldPrice, Price = product.Price, BookCount = product.BookCount,
                         MinBookCount = product.MinBookCount, ImagePreview = product.ImagePreview }).ToListAsync();
             }
         }
