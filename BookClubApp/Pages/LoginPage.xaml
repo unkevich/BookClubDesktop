@@ -66,10 +66,11 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <CheckBox x:Name="chkBoxRemember" Content="Запомнить меня" IsChecked="True" VerticalAlignment="Center" Style="{StaticResource AuthCheckBoxStyle}"/>
+                        <CheckBox x:Name="chkBoxRemember" Content="Запомнить номер" IsChecked="False" VerticalAlignment="Center" Style="{StaticResource AuthCheckBoxStyle}"/>
                         <Button Grid.Column="1" Content="Забыли пароль?" FontSize="11" Foreground="{StaticResource MainBrush}" Padding="0 8" Style="{StaticResource LinkButtonStyle}" Click="btnForgotPassword_Click"/>
                     </Grid>
-                <Button Content="Войти" Style="{StaticResource ArrowButtonStyle}" Margin="0 14 0 0" Click="btnLogin_Click"/>
+                <TextBlock x:Name="txtBlockLoginError" Visibility="Collapsed" Foreground="{StaticResource ErrorBrush}" TextWrapping="Wrap" FontSize="12" Margin="0 8 0 0"/>
+                <Button x:Name="btnLogin" IsDefault="True" Content="Войти" Style="{StaticResource ArrowButtonStyle}" Margin="0 14 0 0" Click="btnLogin_Click"/>
 
                     <Grid Margin="0 14">
                         <Grid.ColumnDefinitions>

@@ -1,0 +1,111 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- #region Icons -->
+    <Geometry x:Key="HomeIcon">M 1,1 L 8,1 8,8 1,8 Z M 12,1 L 19,1 19,8 12,8 Z M 1,12 L 8,12 8,19 1,19 Z M 12,12 L 19,12 19,19 12,19 Z</Geometry>
+    <Geometry x:Key="OrderIcon">M 3,1 L 17,1 17,20 3,20 Z M 6,5 L 14,5 M 6,9 L 14,9 M 6,13 L 12,13</Geometry>
+    <Geometry x:Key="ProductIcon">M 1,5 L 10,1 19,5 19,16 10,21 1,16 Z M 1,5 L 10,10 19,5 M 10,10 L 10,21</Geometry>
+    <Geometry x:Key="UsersIcon">M 8,1 A 4,4 0 1 1 8,9 A 4,4 0 1 1 8,1 Z M 1,21 L 1,18 C 1,10 15,10 15,18 L 15,21 M 16,2 C 22,2 22,9 17,10 M 18,13 Q 23,14 23,20</Geometry>
+    <Geometry x:Key="SearchIcon">M 8,1 A 7,7 0 1 1 8,15 A 7,7 0 1 1 8,1 Z M 13,13 L 20,20</Geometry>
+    <Geometry x:Key="ExitIcon">M 9,1 L 1,1 1,20 9,20 M 7,10 L 20,10 M 15,5 L 20,10 15,15</Geometry>
+    <Geometry x:Key="StockIcon">M 10,1 L 20,19 0,19 Z M 10,7 L 10,12 M 10,15 L 10,16</Geometry>
+    <!-- #endregion -->
+
+    <Style x:Key="PanelStyle" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource WhiteBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource DividersBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="10"/>
+        <Setter Property="Padding" Value="20"/>
+    </Style>
+    <Style x:Key="SectionTitleStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="{StaticResource TextMainBrush}"/>
+    </Style>
+    <Style x:Key="MenuItemStyle" TargetType="ListBoxItem">
+        <Setter Property="Foreground" Value="{StaticResource TextMainBrush}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Padding" Value="18 17"/>
+        <Setter Property="Margin" Value="10 3"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Border x:Name="itemBorder" Background="Transparent" CornerRadius="8" Padding="{TemplateBinding Padding}">
+                        <Grid>
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="38"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                            <Path Data="{TemplateBinding Tag}" Width="21" Height="21" Stretch="Uniform"
+                                  HorizontalAlignment="Left" Stroke="{TemplateBinding Foreground}" StrokeThickness="1.5"/>
+                            <ContentPresenter Grid.Column="1" VerticalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="itemBorder" Property="Background" Value="{StaticResource BackgroundListBrush}"/></Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="itemBorder" Property="Background" Value="{StaticResource BackgroundBrush}"/>
+                            <Setter Property="Foreground" Value="{StaticResource MainBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="DashboardGridStyle" TargetType="DataGrid">
+        <Setter Property="AutoGenerateColumns" Value="False"/>
+        <Setter Property="IsReadOnly" Value="True"/>
+        <Setter Property="CanUserAddRows" Value="False"/>
+        <Setter Property="CanUserDeleteRows" Value="False"/>
+        <Setter Property="CanUserReorderColumns" Value="False"/>
+        <Setter Property="HeadersVisibility" Value="Column"/>
+        <Setter Property="RowHeaderWidth" Value="0"/>
+        <Setter Property="RowHeight" Value="44"/>
+        <Setter Property="ColumnHeaderHeight" Value="40"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Background" Value="{StaticResource WhiteBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+        <Setter Property="HorizontalGridLinesBrush" Value="{StaticResource DividersBrush}"/>
+        <Setter Property="SelectionMode" Value="Single"/>
+        <Setter Property="SelectionUnit" Value="FullRow"/>
+        <Setter Property="CellStyle">
+            <Setter.Value>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Padding" Value="10 0"/>
+                    <Setter Property="Template">
+                        <Setter.Value><ControlTemplate TargetType="DataGridCell"><Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}"><ContentPresenter VerticalAlignment="Center"/></Border></ControlTemplate></Setter.Value>
+                    </Setter>
+                    <Style.Triggers><Trigger Property="IsSelected" Value="True"><Setter Property="Background" Value="{StaticResource BackgroundBrush}"/><Setter Property="Foreground" Value="{StaticResource TextMainBrush}"/></Trigger></Style.Triggers>
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ColumnHeaderStyle">
+            <Setter.Value><Style TargetType="DataGridColumnHeader"><Setter Property="Background" Value="{StaticResource BackgroundListBrush}"/><Setter Property="Foreground" Value="{StaticResource TextSecondaryBrush}"/><Setter Property="BorderThickness" Value="0"/><Setter Property="Padding" Value="10 0"/></Style></Setter.Value>
+        </Setter>
+    </Style>
+    <DataTemplate x:Key="OrderStatusTemplate">
+        <StackPanel Orientation="Horizontal">
+            <Ellipse Width="7" Height="7" Fill="{Binding StatusBrush}" Margin="0 0 7 0" VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding Status}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate x:Key="ProductCardTemplate">
+        <Border Style="{StaticResource PanelStyle}" Width="155" Margin="0 0 12 12" Padding="12">
+            <Grid>
+                <Grid.RowDefinitions><RowDefinition Height="106"/><RowDefinition Height="48"/><RowDefinition Height="30"/><RowDefinition Height="32"/><RowDefinition Height="20"/></Grid.RowDefinitions>
+                <Border Background="{StaticResource BackgroundListBrush}" CornerRadius="5">
+                    <Grid>
+                        <Path Data="{StaticResource ProductIcon}" Width="36" Height="40" Stretch="Uniform" Stroke="{StaticResource BorderBrush}" StrokeThickness="1"/>
+                        <Image Source="{Binding Cover}" Stretch="Uniform" Margin="5"/>
+                    </Grid>
+                </Border>
+                <TextBlock Grid.Row="1" Text="{Binding Name}" FontWeight="SemiBold" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" Margin="0 9 0 0"/>
+                <TextBlock Grid.Row="2" Text="{Binding Author}" Foreground="{StaticResource TextSecondaryBrush}" FontSize="11" TextTrimming="CharacterEllipsis"/>
+                <TextBlock Grid.Row="3" Text="{Binding Price, StringFormat={}{0:N2} ₽}" FontSize="17" FontWeight="Bold"/>
+                <TextBlock Grid.Row="4" Text="{Binding StockText}" Foreground="{Binding StockBrush}" FontSize="11"/>
+            </Grid>
+        </Border>
+    </DataTemplate>
+</ResourceDictionary>

@@ -1,22 +1,57 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using BookClubApp.Helpers;
+using BookClubApp.Services;
+using System;
 
 namespace BookClubApp.Pages {
     public partial class LoginPage : Page {
         public LoginPage() {
             InitializeComponent();
             NumericInput.Attach(txtBoxPhone);
+            try {
+                txtBoxPhone.Text = Properties.Settings.Default.RememberedPhone;
+                chkBoxRemember.IsChecked = txtBoxPhone.Text.Length > 0;
+            } catch (System.Configuration.ConfigurationErrorsException) { }
         }
 
-        private void btnLogin_Click(object sender, RoutedEventArgs e) {
-            // Переход к существующей странице товаров. Проверка входа подключается отдельно.
-            AuthWindow window = (AuthWindow)Window.GetWindow(this);
-            window.ShowProducts();
+        private async void btnLogin_Click(object sender, RoutedEventArgs e) {
+            if (txtBoxPhone.Text.Length != 10 || string.IsNullOrEmpty(pwdBoxPassword.Password)) {
+                txtBlockLoginError.Text = "Введите 10 цифр номера и пароль.";
+                txtBlockLoginError.Visibility = Visibility.Visible;
+                return;
+            }
+            txtBlockLoginError.Visibility = Visibility.Collapsed;
+            IsEnabled = false;
+            try {
+                UserSession session = await AuthService.SignInAsync(txtBoxPhone.Text, pwdBoxPassword.Password);
+                if (!IsLoaded) { AuthService.SignOut(); return; }
+                if (session == null) {
+                    txtBlockLoginError.Text = "Неверный номер телефона или пароль.";
+                    txtBlockLoginError.Visibility = Visibility.Visible;
+                    return;
+                }
+                try {
+                    Properties.Settings.Default.RememberedPhone = chkBoxRemember.IsChecked == true ? txtBoxPhone.Text : "";
+                    Properties.Settings.Default.Save();
+                } catch (Exception error) when (error is System.Configuration.ConfigurationErrorsException || error is System.IO.IOException || error is UnauthorizedAccessException) {
+                    // Ошибка сохранения номера не отменяет успешный вход.
+                }
+                pwdBoxPassword.Clear();
+                ((AuthWindow)Window.GetWindow(this)).ShowWorkspace();
+            } catch (Exception) {
+                AuthService.SignOut();
+                if (IsLoaded) {
+                    txtBlockLoginError.Text = "Не удалось войти. Проверьте подключение к базе данных и попробуйте снова.";
+                    txtBlockLoginError.Visibility = Visibility.Visible;
+                }
+            } finally {
+                IsEnabled = true;
+            }
         }
-
         private void btnLoginGuest_Click(object sender, RoutedEventArgs e) {
             AuthWindow window = (AuthWindow)Window.GetWindow(this);
+            AuthService.SignOut();
             window.ShowProducts();
         }
 

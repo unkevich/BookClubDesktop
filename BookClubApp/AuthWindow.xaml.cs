@@ -1,6 +1,7 @@
 ﻿using BookClubApp.Pages;
 using System.Windows;
 using System.Windows.Navigation;
+using BookClubApp.Services;
 
 namespace BookClubApp {
     public partial class AuthWindow : Window {
@@ -21,6 +22,27 @@ namespace BookClubApp {
             MinWidth = 900; MinHeight = 600;
             Width = 1100; Height = 700;
             WindowState = WindowState.Maximized;
+        }
+
+        public void ShowWorkspace() {
+            if (AuthService.Current == null) { ShowLogin(); return; }
+            if (!AuthService.Current.IsStaff) { ShowProducts(); return; }
+            AuthService.RequireStaff();
+            MainFrame.Navigate(new HomePage());
+            SizeToContent = SizeToContent.Manual;
+            MinWidth = 1100; MinHeight = 700;
+            Width = 1400; Height = 900;
+            WindowState = WindowState.Maximized;
+        }
+
+        public void ShowLogin() {
+            AuthService.SignOut();
+            WindowState = WindowState.Normal;
+            MinWidth = 380; MinHeight = 600;
+            Width = 400; Height = 660;
+            MainFrame.Navigate(new LoginPage());
+            Left = SystemParameters.WorkArea.Left + (SystemParameters.WorkArea.Width - Width) / 2;
+            Top = SystemParameters.WorkArea.Top + (SystemParameters.WorkArea.Height - Height) / 2;
         }
     }
 }
