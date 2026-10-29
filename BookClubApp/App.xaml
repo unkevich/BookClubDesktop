@@ -4,6 +4,12 @@
              xmlns:local="clr-namespace:BookClubApp"
              StartupUri="AuthWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/ColorStyles.xaml"/>
+                <ResourceDictionary Source="/Styles/AuthIllustrations.xaml"/>
+                <ResourceDictionary Source="/Styles/AuthStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

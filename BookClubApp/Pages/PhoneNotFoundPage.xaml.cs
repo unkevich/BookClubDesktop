@@ -1,0 +1,23 @@
+﻿using System.Windows;
+using System.Windows.Controls;
+
+namespace BookClubApp.Pages {
+    public partial class PhoneNotFoundPage : Page {
+        public PhoneNotFoundPage() {
+            InitializeComponent();
+        }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e) {
+            NavigationService.Navigate(new LoginPage());
+        }
+
+        private void btnContinue_Click(object sender, RoutedEventArgs e) {
+            NavigationService.Navigate(new PasswordRecoveryPage());
+        }
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e) {
+            NavigationService.Navigate(new LoginPage());
+        }
+
+    }
+}

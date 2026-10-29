@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -67,8 +67,19 @@
       <DependentUpon>AuthWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\ProductsTablePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\ColorStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Pages\ProductsTablePage.xaml.cs">
+      <DependentUpon>ProductsTablePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -98,7 +109,81 @@
     <Resource Include="Resources\Images\bookclub_logo.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Entity\" />
+    <Folder Include="Forms\Modals\" />
+    <Folder Include="Modals\" />
     <Folder Include="Resources\Icons\" />
+    <Folder Include="Styles\Button\" />
+    <Folder Include="Styles\ComboBox\" />
+    <Folder Include="Styles\DataGrids\" />
+    <Folder Include="Styles\TextBox\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Helpers\NumericInput.cs" />
+    <Page Include="Pages\LoginPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Pages\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Pages\PasswordRecoveryPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Pages\PasswordRecoveryPage.xaml.cs">
+      <DependentUpon>PasswordRecoveryPage.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Pages\ConfirmationCodePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Pages\ConfirmationCodePage.xaml.cs">
+      <DependentUpon>ConfirmationCodePage.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Pages\NewPasswordPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Pages\NewPasswordPage.xaml.cs">
+      <DependentUpon>NewPasswordPage.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Pages\PasswordSuccessPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Pages\PasswordSuccessPage.xaml.cs">
+      <DependentUpon>PasswordSuccessPage.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Pages\PhoneNotFoundPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Pages\PhoneNotFoundPage.xaml.cs">
+      <DependentUpon>PhoneNotFoundPage.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Pages\InvalidCodePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Pages\InvalidCodePage.xaml.cs">
+      <DependentUpon>InvalidCodePage.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Pages\TooManyAttemptsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Pages\TooManyAttemptsPage.xaml.cs">
+      <DependentUpon>TooManyAttemptsPage.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Styles\AuthStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\AuthIllustrations.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

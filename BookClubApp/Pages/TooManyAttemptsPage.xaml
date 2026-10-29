@@ -1,0 +1,28 @@
+﻿<Page x:Class="BookClubApp.Pages.TooManyAttemptsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      mc:Ignorable="d" d:DesignHeight="600" d:DesignWidth="380"
+      Title="Слишком много попыток" Background="{StaticResource WhiteBrush}"
+      FontFamily="Segoe UI" UseLayoutRounding="True">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <Grid Margin="24 16 24 24">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Button Content="‹" FontSize="26" HorizontalAlignment="Left" Padding="0" Width="24"
+                    ToolTip="Вернуться назад" AutomationProperties.Name="Вернуться назад"
+                    Style="{StaticResource LinkButtonStyle}" Click="btnBack_Click"/>
+            <StackPanel Grid.Row="1" MaxWidth="320" Margin="0 22 0 0">
+                <Image Source="{StaticResource AttemptsImage}" Style="{StaticResource AuthIllustrationStyle}"/>
+                <TextBlock Text="Слишком много попыток" Style="{StaticResource AuthTitleStyle}"/>
+                <TextBlock Text="Вы превысили количество попыток.&#10;Попробуйте снова через 15 минут." Style="{StaticResource AuthDescriptionStyle}"/>
+                <Button Content="Понятно" Style="{StaticResource SecondaryButtonStyle}" Margin="0 32 0 0" Click="btnContinue_Click"/>
+                <Button Content="Вернуться к входу" Style="{StaticResource LinkButtonStyle}" Margin="0 12 0 0" Click="btnLogin_Click"/>
+
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Page>

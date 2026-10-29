@@ -1,0 +1,28 @@
+﻿<Page x:Class="BookClubApp.Pages.InvalidCodePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      mc:Ignorable="d" d:DesignHeight="600" d:DesignWidth="380"
+      Title="Неверный код" Background="{StaticResource WhiteBrush}"
+      FontFamily="Segoe UI" UseLayoutRounding="True">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <Grid Margin="24 16 24 24">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Button Content="‹" FontSize="26" HorizontalAlignment="Left" Padding="0" Width="24"
+                    ToolTip="Вернуться назад" AutomationProperties.Name="Вернуться назад"
+                    Style="{StaticResource LinkButtonStyle}" Click="btnBack_Click"/>
+            <StackPanel Grid.Row="1" MaxWidth="320" Margin="0 22 0 0">
+                <Image Source="{StaticResource CodeErrorImage}" Style="{StaticResource AuthIllustrationStyle}"/>
+                <TextBlock Text="Неверный код" Style="{StaticResource AuthTitleStyle}"/>
+                <TextBlock Text="Введённый код не совпадает.&#10;Проверьте код и попробуйте снова." Style="{StaticResource AuthDescriptionStyle}"/>
+                <Button Content="Попробовать снова" Style="{StaticResource PrimaryButtonStyle}" Margin="0 32 0 0" Click="btnContinue_Click"/>
+                <Button Content="Отправить новый код" Style="{StaticResource LinkButtonStyle}" Margin="0 12 0 0" Click="btnLogin_Click"/>
+
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Page>
